@@ -46,7 +46,6 @@ app.get("/add_post", pageController.getAddPage)
 app.get("/posts/edit/:id", pageController.getEditPage)
 
 
-// rmb80yuqp
 
 const PORT = process.env.PORT || 5000
 
