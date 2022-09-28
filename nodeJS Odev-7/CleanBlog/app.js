@@ -29,6 +29,7 @@ app.use(express.urlencoded({ extended: true })) // urldekı datayı okumayı sag
 app.use(express.json())// datayı json a donduruyor 
 app.use(methodOverride('_method', {
     methods: ["POST", "GET"]
+
 }))
 
 //ROUTES
