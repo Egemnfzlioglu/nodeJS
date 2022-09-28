@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const methodOverride = require('method-override')
 
 const ejs = require("ejs")
+require('dotenv').config()
 const Post = require("./models/Post")
 const pageController = require("./controller/pageController")
 const postController = require("./controller/postController")
@@ -10,10 +11,14 @@ const postController = require("./controller/postController")
 const app = express()
 
 // connect DB
-mongoose.connect("mongodb://localhost/cleanblog-test-db", {
+mongoose.connect(`mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.nothobq.mongodb.net/post-db?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 })
+    .then(() => console.log("DB CONNECTED"))
+    .catch((err) => {
+        console.log(err);
+    })
 
 // Template Engine
 app.set("view engine", "ejs")
@@ -41,9 +46,9 @@ app.get("/add_post", pageController.getAddPage)
 app.get("/posts/edit/:id", pageController.getEditPage)
 
 
+// rmb80yuqp
 
-
-const PORT = 4000
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
     console.log(`Sunucu ${PORT} Portunda Başladı...`);
